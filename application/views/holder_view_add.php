@@ -19,7 +19,7 @@
 					<li>
 						<i class="icon-chevron-right"></i> <?php echo anchor("holder/search", "股东管理");?><span class="divider">/</span>
 					</li>
-					<li class="active">所有股东</li>
+					<li class="active">新增股东</li>
 					<li class="pull-right">
 						<i class="icon-share-alt"></i> <?php echo anchor("holder/search", "返回");?>
 					</li>

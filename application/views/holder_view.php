@@ -16,9 +16,10 @@
     <div class="row">
       <div class="span12">
         <ul class="breadcrumb">
-          <li><i class="icon-chevron-right"></i> <?php echo anchor("holder/search", "股东管理")?> <span class="divider">/</span>
+          <li>
+          	<i class="icon-chevron-right"></i> <?php echo anchor("holder/search", "股东管理")?><span class="divider">/</span>
           </li>
-          <li class="active">所有股东</li>
+          <li class="active">股东列表</li>
           <li class="pull-right"><i class="icon-plus"></i> <?php echo anchor("holder/add", "新增")?></li>
         </ul>
       </div>
