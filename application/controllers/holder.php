@@ -4,9 +4,23 @@ class Holder extends Base {
   public function search($current=0) {
   	$this->load->helper(array('url','pager'));
   	$this->load->library('pagination');
+  	$this->load->database();
 
-  	$config = get_pager_config(base_url('holder/search'));
-  	$config['total_rows'] = 200;
+  	$page_size = 10;
+  	$this->db->select('id,holder_name');
+  	$this->db->from('d_holder');
+  	$this->db->where('data_status', 1);
+  	$this->db->order_by("id", "desc");
+  	$this->db->limit($page_size, $current);
+  	$query = $this->db->get();
+  	$this->data['result'] = $query->result();
+
+  	$this->db->from('d_holder');
+  	$this->db->where('data_status', 1);
+  	$query_count = $this->db->count_all_results();
+
+  	$config = get_pager_config(base_url('holder/search'), $page_size);
+  	$config['total_rows'] = $query_count;
 
   	$this->pagination->initialize($config);
 		$this->data['pager'] = $this->pagination->create_links();
@@ -21,7 +35,7 @@ class Holder extends Base {
   }
 
   public function save() {
-  	$this->load->helper(array('form',"date"));
+  	$this->load->helper(array('form',"date","url"));
   	$this->load->library('form_validation');
 
   	$config = array(
@@ -48,8 +62,17 @@ class Holder extends Base {
   		);
   		$this->db->insert("d_holder", $record);
 
-  		$this->search();
+  		redirect('holder/search');
   	}
+  }
+
+  public function detail($id=0) {
+  	$this->load->helper(array('url'));
+		if(isset($id) && $id>0) {
+			redirect('holder/search');
+		} else {
+
+		}
   }
 }
 ?>

@@ -41,8 +41,5 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
-$route['holder/(:num)'] = "holder/detail/$1";
-
-
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

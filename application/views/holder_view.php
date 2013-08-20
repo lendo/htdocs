@@ -29,72 +29,22 @@
 				<thead>
 					<tr>
 						<th>
-							产品
+							ID
 						</th>
 						<th>
-							交付时间
-						</th>
-						<th>
-							状态
+							股东名称
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-					</tr>
-					<tr>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
-					</tr>
+					<?php
+		        foreach ($result as $row) {
+		          echo '<tr>';
+		          echo '<td>'.$row->id.'</td>';
+		          echo '<td>'.$row->holder_name.'</td>';
+		          echo '</tr>';
+		        }
+		      ?>
 				</tbody>
 			</table>
       </div>

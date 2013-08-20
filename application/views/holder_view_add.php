@@ -35,7 +35,7 @@
 						<label></label>
 						<?php echo form_submit(array('class'=>'btn', 'value'=>'提交'));?>
 					</fieldset>
-				</form>
+				<?php echo form_close();?>
 			</div>
 		</div>
 	</div>
