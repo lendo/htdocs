@@ -2,31 +2,11 @@
 require 'base.php';
 class Holder extends Base {
   public function search($current=0) {
-  	$this->load->helper(array('url'));
+  	$this->load->helper(array('url','pager'));
   	$this->load->library('pagination');
 
-  	$config['base_url'] = base_url('holder/search');
+  	$config = get_pager_config(base_url('holder/search'));
   	$config['total_rows'] = 200;
-  	$config['per_page'] = 20;
-  	$config['first_link'] = '首页';
-  	$config['last_link'] = '末页';
-  	$config['next_link'] = '下页';
-  	$config['prev_link'] = '上页';
-  	$config['full_tag_open'] = '<div class="pagination pull-right"><ul>';
-  	$config['full_tag_close'] = '</ul></div>';
-
-  	$config['first_tag_open'] = '<li>';
-  	$config['first_tag_close'] = '</li>';
-  	$config['last_tag_open'] = '<li>';
-  	$config['last_tag_close'] = '</li>';
-  	$config['next_tag_open'] = '<li>';
-  	$config['next_tag_close'] = '</li>';
-  	$config['prev_tag_open'] = '<li>';
-  	$config['prev_tag_close'] = '</li>';
-  	$config['cur_tag_open'] = '<li class="disabled"><span>';
-  	$config['cur_tag_close'] = '</span></li>';
-  	$config['num_tag_open'] = '<li>';
-  	$config['num_tag_close'] = '</li>';
 
   	$this->pagination->initialize($config);
 		$this->data['pager'] = $this->pagination->create_links();
@@ -41,7 +21,7 @@ class Holder extends Base {
   }
 
   public function save() {
-  	$this->load->helper(array('form'));
+  	$this->load->helper(array('form',"date"));
   	$this->load->library('form_validation');
 
   	$config = array(
@@ -61,12 +41,14 @@ class Holder extends Base {
   		$this->load->database();
 
   		$record = array(
-  				'holder_name'=>$_POST["holder_name"],
+  				'holder_name'=>$this->input->post("holder_name"),
   				'data_status'=>'1',
-  				'create_time'=>date('Y-M-D H:i:s'),
-  				'update_time'=>date('Y-M-D H:i:s')
+  				'create_time'=>date('Y-m-d H:i:s'),
+  				'update_time'=>date('Y-m-d H:i:s')
   		);
   		$this->db->insert("d_holder", $record);
+
+  		$this->search();
   	}
   }
 }
