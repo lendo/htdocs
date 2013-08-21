@@ -358,8 +358,6 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 // 页面静态样式表配置
-$config['css'] = 'static/css/test.css';
-
 $config['bootstrap_css'] = 'static/bootstrap/css/bootstrap.min.css';
 $config['bootstrap_custom_css'] = 'static/bootstrap/css/bootstrap_custom.css';
 $config['bootstrap_js'] = 'static/bootstrap/js/bootstrap.min.js';
