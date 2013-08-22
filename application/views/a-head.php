@@ -12,8 +12,10 @@ echo link_tag($boilerplate_normalize_css);
 echo link_tag($boilerplate_main_css);
 echo link_tag($bootstrap_css);
 echo link_tag($bootstrap_custom_css);
+echo link_tag($art_dialog_css);
 ?>
 
 <script src="<?php echo $base_url . $boilerplate_jquery_js?>"></script>
 <script src="<?php echo $base_url . $boilerplate_modernizr_js?>"></script>
 <script src="<?php echo $base_url . $bootstrap_js?>"></script>
+<script src="<?php echo $base_url . $art_dialog_js?>"></script>

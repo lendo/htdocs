@@ -2,6 +2,8 @@
 require 'base.php';
 class Holder extends Base {
   public function search($current=0) {
+  	$this->load->helper(array('form'));
+
   	$this->load->helper(array('url','pager'));
   	$this->load->library('pagination');
   	$this->load->database();
@@ -25,16 +27,25 @@ class Holder extends Base {
   	$this->pagination->initialize($config);
 		$this->data['pager'] = $this->pagination->create_links();
 
-    $this->load->view('holder_view', $this->data);
+		$this->data['current'] = $current;
+
+    $this->load->view('holder_view_search', $this->data);
   }
 
-  public function add() {
+  public function add($current=0) {
   	$this->load->helper(array('form'));
   	$this->load->library('form_validation');
+
+  	if(isset($current) && $current>0) {
+  		$this->data['current'] = $current;
+  	} else {
+  		$this->data['current'] = 0;
+  	}
+
   	$this->load->view('holder_view_add', $this->data);
   }
 
-  public function save() {
+  public function save($current=0) {
   	$this->load->helper(array('form',"date","url"));
   	$this->load->library('form_validation');
 
@@ -60,19 +71,102 @@ class Holder extends Base {
   				'create_time'=>date('Y-m-d H:i:s'),
   				'update_time'=>date('Y-m-d H:i:s')
   		);
+
   		$this->db->insert("d_holder", $record);
 
-  		redirect('holder/search');
+  		if(isset($current) && $current>0) {
+  			redirect('holder/search/'.$current);
+  		} else {
+  			redirect('holder/search');
+  		}
   	}
   }
 
-  public function detail($id=0) {
-  	$this->load->helper(array('url'));
-		if(isset($id) && $id>0) {
-			redirect('holder/search');
-		} else {
+  public function edit($id=0,$current=0) {
+  	$this->load->helper(array('url','form'));
+  	$this->load->library('form_validation');
 
+  	if(isset($current) && $current>0) {
+  		$this->data['current'] = $current;
+  	} else {
+  		$this->data['current'] = 0;
+  	}
+
+		if(isset($id) && $id>0) {
+			$this->load->database();
+			$this->db->select('id,holder_name');
+			$this->db->from('d_holder');
+			$this->db->where('id', $id);
+			$this->db->limit(1);
+			$query = $this->db->get();
+			$this->data['id'] = $query->row()->id;
+			$this->data['holder_name'] = $query->row()->holder_name;
+
+			$this->load->view('holder_view_edit', $this->data);
+		} else {
+			if(isset($current) && $current>0) {
+  			redirect('holder/search/'.$current);
+  		} else {
+  			redirect('holder/search');
+  		}
 		}
+  }
+
+  public function update($current=0) {
+  	$this->load->helper(array('form',"date","url"));
+  	$this->load->library('form_validation');
+
+  	$config = array(
+  			array(
+  					'field'   => 'holder_name',
+  					'label'   => '股东名称',
+  					'rules'   => 'trim|required|max_length[125]|xss_clean'
+  			)
+  	);
+
+  	$this->form_validation->set_rules($config);
+  	$this->form_validation->set_error_delimiters('', '<br/>');
+
+  	if($this->form_validation->run() == FALSE) {
+  		// 跳转到编辑页面
+  		if(isset($current) && $current>0) {
+  			$this->edit($this->input->post("id"), $current);
+  		} else {
+  			$this->edit($this->input->post("id"));
+  		}
+  	} else {
+  		$this->load->database();
+
+  		$record = array(
+  				'holder_name'=>$this->input->post("holder_name"),
+  				'update_time'=>date('Y-m-d H:i:s')
+  		);
+
+  		$this->db->where('id',$this->input->post("id"));
+			$this->db->update('d_holder',$record);
+
+  		if(isset($current) && $current>0) {
+  			redirect('holder/search/'.$current);
+  		} else {
+  			redirect('holder/search');
+  		}
+  	}
+  }
+
+  public function delete($id=0, $current=0) {
+  	$this->load->helper(array('url'));
+
+  	if(isset($id) && $id>0) {
+  		$this->load->database();
+  		$this->db->where('id', $id);
+			$this->db->delete('d_holder');
+  	}
+
+  	if(isset($current) && $current>0) {
+  		redirect('holder/search/'.$current);
+  	} else {
+  		redirect('holder/search');
+  	}
   }
 }
 ?>

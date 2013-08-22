@@ -372,5 +372,8 @@ $config['boilerplate_modernizr_js'] = 'static/boilerplate/js/vendor/modernizr-2.
 $config['boilerplate_main_js'] = 'static/boilerplate/js/main.js';
 $config['boilerplate_plugin_js'] = 'static/boilerplate/js/plugins.js';
 
+$config['art_dialog_js'] = 'static/dialog/artDialog.min.js';
+$config['art_dialog_css'] = 'static/dialog/skins/default_a.css';
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

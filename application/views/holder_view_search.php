@@ -10,7 +10,7 @@
 </head>
 <body>
   <?php require 'a-body-top.php';?>
-  <?php require 'b-top.php';?>
+  <?php require 'b-top-holder.php';?>
 
   <div class="container dd-box">
     <div class="row">
@@ -20,7 +20,7 @@
           	<i class="icon-chevron-right"></i> <?php echo anchor("holder/search", "股东管理")?><span class="divider">/</span>
           </li>
           <li class="active">股东列表</li>
-          <li class="pull-right"><i class="icon-plus"></i> <?php echo anchor("holder/add", "新增")?></li>
+          <li class="pull-right"><i class="icon-plus"></i> <?php echo anchor("holder/add/$current", "新增股东信息")?></li>
         </ul>
       </div>
 
@@ -29,10 +29,10 @@
 				<thead>
 					<tr>
 						<th>
-							ID
-						</th>
-						<th>
 							股东名称
+						</th>
+						<th style="text-align:center;width:150px;">
+							操作
 						</th>
 					</tr>
 				</thead>
@@ -40,8 +40,14 @@
 					<?php
 		        foreach ($result as $row) {
 		          echo '<tr>';
-		          echo '<td>'.$row->id.'</td>';
 		          echo '<td>'.$row->holder_name.'</td>';
+		          echo '<td style="text-align:center;">';
+		          echo '<i class="icon-edit"></i> ';
+		          echo anchor("holder/edit/$row->id/$current", "修改");
+		          echo ' ';
+		          echo '<i class="icon-trash"></i> ';
+		          echo "<a href='#' onclick='sdelete($row->id);'>删除</a>";
+		          echo '</td>';
 		          echo '</tr>';
 		        }
 		      ?>
@@ -56,5 +62,25 @@
     </div>
   </div>
   <?php require 'a-body-bottom.php';?>
+  <script type="text/javascript">
+	  function sdelete(id) {
+			art.dialog({
+	      fixed: true,
+	      lock: true,
+	      title: '删除提示',
+	      width: 400,
+	      okValue: '确认',
+	      ok: function () {
+	      	window.location='<?php echo base_url("holder/delete");?>/' + id + '<?php echo "/$current";?>';
+	        return true;
+	      },
+	      cancelValue: '取消',
+	      cancel: function () {
+	        return true;
+	      },
+	      content: "是否确认删除该股东信息？"
+	    });
+		}
+  </script>
 </body>
 </html>

@@ -17,6 +17,8 @@ class Base extends CI_Controller {
 		$this->data['boilerplate_modernizr_js'] = $this->config->item('boilerplate_modernizr_js');
 		$this->data['boilerplate_main_js'] = $this->config->item('boilerplate_main_js');
 		$this->data['boilerplate_plugin_js'] = $this->config->item('boilerplate_plugin_js');
+		$this->data['art_dialog_js'] = $this->config->item('art_dialog_js');
+		$this->data['art_dialog_css'] = $this->config->item('art_dialog_css');
 	}
 }
 ?>

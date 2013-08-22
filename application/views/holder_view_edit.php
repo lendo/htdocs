@@ -19,7 +19,7 @@
 					<li>
 						<i class="icon-chevron-right"></i> <?php echo anchor("holder/search", "股东管理");?><span class="divider">/</span>
 					</li>
-					<li class="active">新增股东信息</li>
+					<li class="active">修改股东信息</li>
 					<li class="pull-right">
 						<i class="icon-share-alt"></i> <?php echo anchor("holder/search", "返回");?>
 					</li>
@@ -28,10 +28,10 @@
 
 			<div class="span12">
 				<?php echo validation_errors('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>', '</div>'); ?>
-				<?php echo form_open("holder/save/$current")?>
+				<?php echo form_open("holder/update/$current",'',array('id'=>$id))?>
 					<fieldset>
 						<label>股东名称</label>
-						<?php echo form_input(array('value'=>set_value('holder_name'),'name'=>'holder_name','class'=>'input-xxlarge','placeholder'=>'请输入股东名称'));?>
+						<?php echo form_input(array('value'=>$holder_name,'name'=>'holder_name','class'=>'input-xxlarge','placeholder'=>'请输入股东名称'));?>
 						<label></label>
 						<?php echo form_submit(array('class'=>'btn', 'value'=>'保存'));?>
 					</fieldset>
