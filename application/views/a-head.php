@@ -15,6 +15,7 @@ echo link_tag($boilerplate_main_css);
 echo link_tag($bootstrap_css);
 echo link_tag($bootstrap_custom_css);
 echo link_tag($art_dialog_css);
+echo link_tag("xampp.ico", "shortcut icon");
 ?>
 
 <script src="<?php echo $base_url . $boilerplate_jquery_js?>"></script>
