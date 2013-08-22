@@ -21,7 +21,7 @@
 					</li>
 					<li class="active">修改股东信息</li>
 					<li class="pull-right">
-						<i class="icon-share-alt"></i> <?php echo anchor("holder/search", "返回");?>
+						<i class="icon-share-alt"></i> <?php echo anchor("holder/search/$current", "返回");?>
 					</li>
 				</ul>
 			</div>

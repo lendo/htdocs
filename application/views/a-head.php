@@ -6,6 +6,8 @@ $this->load->helper(array('url','html'));
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>易盈投资</title>
+
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 <?php
 echo link_tag($boilerplate_normalize_css);
