@@ -2,6 +2,9 @@
 require 'base.php';
 class Holder extends Base {
   public function search($current=0) {
+  	$this->load->library("session");
+  	$this->session->set_userdata(array('site'=>'uumind.com'));
+  	
   	$this->load->helper(array('form'));
 
   	$this->load->helper(array('url','pager'));
