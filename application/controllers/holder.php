@@ -46,6 +46,13 @@ class Holder extends Base {
   }
 
   public function save($current=0) {
+  	if(isset($current) && $current>0) {
+  		$this->data['current'] = $current;
+  	} else {
+  		$this->data['current'] = 0;
+  	}
+
+
   	$this->load->helper(array('form',"date","url"));
   	$this->load->library('form_validation');
 
